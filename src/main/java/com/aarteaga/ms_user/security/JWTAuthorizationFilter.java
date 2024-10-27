@@ -22,7 +22,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     private Claims setSigningKey(HttpServletRequest request) {
         String jwtToken = request.
-                getHeader(HEADER_AUTHORIZACION_KEY).
+                getHeader(HEADER_AUTHORIZATION_KEY).
                 replace(TOKEN_BEARER_PREFIX, "");
 
         return Jwts.parserBuilder()
@@ -45,7 +45,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private boolean isJWTValid(HttpServletRequest request, HttpServletResponse res) {
-        String authenticationHeader = request.getHeader(HEADER_AUTHORIZACION_KEY);
+        String authenticationHeader = request.getHeader(HEADER_AUTHORIZATION_KEY);
         if (authenticationHeader == null || !authenticationHeader.startsWith(TOKEN_BEARER_PREFIX))
             return false;
         return true;
